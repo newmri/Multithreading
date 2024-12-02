@@ -1,8 +1,12 @@
 #include <thread>
+#include <mutex>
 
 int x{ 0 };
+std::mutex mutex;
 
 void func() {
+	std::lock_guard<std::mutex> lck_guard(mutex);
+
 	while (x == 0) {
 		x = 1 - x;
 	}
